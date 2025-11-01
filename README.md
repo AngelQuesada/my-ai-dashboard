@@ -67,7 +67,7 @@ This will start the development server, run the Playwright tests, and then shut 
 
 The project is organized as follows:
 
--   `src/app`: Contains the pages for the application.
+-   `src/pages`: Contains the pages for the application.
 -   `src/components`: Contains the reusable React components.
 -   `src/utils`: Contains utility functions, such as the Supabase client.
 -   `tests`: Contains the unit and end-to-end tests.
