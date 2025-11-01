@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You'll need to have [Node.js](https://nodejs.org/) (version 18 or higher) and [npm](https://www.npmjs.com/) installed on your machine.
+You'll need to have [Node.js](https://nodejs.org/) (version 18 or higher) and [pnpm](https://pnpm.io/) installed on your machine.
 
 ### Installation
 
@@ -16,9 +16,9 @@ You'll need to have [Node.js](https://nodejs.org/) (version 18 or higher) and [n
     ```sh
     git clone https://github.com/your_username_/my-ai-dashboard.git
     ```
-2.  Install NPM packages
+2.  Install packages
     ```sh
-    npm install
+    pnpm install
     ```
 3.  Set up your environment variables. Copy the `.env.development.example` file to a new file named `.env.development.local` and fill in the required values.
     ```sh
@@ -34,7 +34,7 @@ You'll need to have [Node.js](https://nodejs.org/) (version 18 or higher) and [n
 To run the development server, use the following command:
 
 ```sh
-npm run dev
+pnpm dev
 ```
 
 This will start the development server on [http://localhost:3000](http://localhost:3000).
@@ -48,7 +48,7 @@ The project includes both unit and end-to-end tests.
 To run the unit tests, use the following command:
 
 ```sh
-npm run test
+pnpm test
 ```
 
 This will run the Jest tests and output the results to the console.
@@ -58,7 +58,7 @@ This will run the Jest tests and output the results to the console.
 To run the end-to-end tests, use the following command:
 
 ```sh
-npm run test:e2e
+pnpm test:e2e
 ```
 
 This will start the development server, run the Playwright tests, and then shut down the server.

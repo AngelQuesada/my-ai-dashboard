@@ -1,20 +1,25 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import FamososGranadaBox from '@/components/boxes/FamososGranadaBox';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
+import { createMockRouter } from '../test-utils/createMockRouter';
 
-// Mock the useRouter hook
-jest.mock('next/navigation', () => ({
+jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }));
 
 describe('FamososGranadaBox', () => {
   it('renders the box and handles button clicks', async () => {
     const user = userEvent.setup();
-    const push = jest.fn();
-    (useRouter as jest.Mock).mockReturnValue({ push });
+    const router = createMockRouter();
+    (useRouter as jest.Mock).mockReturnValue(router);
 
-    render(<FamososGranadaBox />);
+    render(
+      <RouterContext.Provider value={router}>
+        <FamososGranadaBox />
+      </RouterContext.Provider>
+    );
 
     // Check that the box is rendered
     expect(screen.getByText('Búsqueda de famosos en Granada')).toBeInTheDocument();
@@ -23,7 +28,7 @@ describe('FamososGranadaBox', () => {
     await user.click(screen.getByRole('button', { name: /Abrir Caja/i }));
 
     // Check that the router was called
-    expect(push).toHaveBeenCalledWith('/cajas/famosos-granada');
+    expect(router.push).toHaveBeenCalledWith('/cajas/famosos-granada');
 
     // Click the "Configuración" button
     await user.click(screen.getByLabelText('settings'));

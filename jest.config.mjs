@@ -14,6 +14,9 @@ const config = {
   testEnvironment: 'jest-environment-jsdom',
   preset: 'ts-jest',
   testPathIgnorePatterns: ['<rootDir>/tests/e2e/'],
+  transformIgnorePatterns: [
+    '/node_modules/(?!jose|@supabase/auth-helpers-nextjs|@supabase/auth-helpers-shared|@supabase/supabase-js)',
+  ],
   globalSetup: '<rootDir>/tests/setup/globalSetup.mjs',
   globalTeardown: '<rootDir>/tests/setup/globalTeardown.mjs',
 }

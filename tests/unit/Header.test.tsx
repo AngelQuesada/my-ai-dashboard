@@ -1,25 +1,27 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Header from '@/components/Header';
-import { useRouter } from 'next/navigation';
-import { createBrowserClient } from '@supabase/ssr';
-
-// Mock the useRouter hook
-jest.mock('next/navigation', () => ({
-  useRouter: jest.fn(),
-}));
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/router';
 
 // Mock the Supabase client
 const signOutMock = jest.fn();
-jest.mock('@supabase/ssr', () => ({
-  createBrowserClient: jest.fn(() => ({
+jest.mock('@supabase/auth-helpers-nextjs', () => ({
+  createBrowserSupabaseClient: jest.fn(() => ({
     auth: {
       signOut: signOutMock,
     },
   })),
 }));
 
+// Mock the useRouter hook
+jest.mock('next/router', () => ({
+  useRouter: jest.fn(),
+}));
+
 describe('Header', () => {
   it('renders the header and handles logout', async () => {
+    const user = userEvent.setup();
     const push = jest.fn();
     (useRouter as jest.Mock).mockReturnValue({ push });
 
@@ -29,7 +31,7 @@ describe('Header', () => {
     expect(screen.getByText('My AI Dashboard')).toBeInTheDocument();
 
     // Click the menu button
-    fireEvent.click(screen.getByLabelText('menu'));
+    await user.click(screen.getByLabelText('menu'));
 
     // Check that the logout menu item is visible
     const logoutMenuItem = screen.getByText('Cerrar Sesión');
@@ -37,7 +39,7 @@ describe('Header', () => {
 
     // Click the logout menu item
     await act(async () => {
-      fireEvent.click(logoutMenuItem);
+      await user.click(logoutMenuItem);
     });
 
 
