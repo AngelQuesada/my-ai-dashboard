@@ -39,7 +39,10 @@ export async function POST(request: Request) {
   try {
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const text = await response.text();
+    let text = await response.text();
+
+    // Limpiamos la respuesta de Gemini para asegurarnos de que sea un JSON válido.
+    text = text.replace(/```json/g, '').replace(/```/g, '');
     const geminiResponse = JSON.parse(text);
 
     // 3. Guardamos los resultados en Supabase
