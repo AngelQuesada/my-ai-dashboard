@@ -1,4 +1,3 @@
-'use client';
 import {
   FormControl,
   InputLabel,
@@ -29,7 +28,7 @@ export default function CronConfig({ value, onChange }: CronConfigProps) {
 
   return (
     <Grid container spacing={2}>
-      <Grid xs={12}>
+      <Grid item xs={12}>
         <FormControl fullWidth>
           <InputLabel id="frequency-label">Frecuencia</InputLabel>
           <Select
@@ -49,7 +48,7 @@ export default function CronConfig({ value, onChange }: CronConfigProps) {
       </Grid>
       {/* // Si la frecuencia es diaria, mostramos el campo de la hora. */}
       {frequency === 'daily' && (
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <TextField
             label="Hora"
             type="time"
@@ -62,7 +61,7 @@ export default function CronConfig({ value, onChange }: CronConfigProps) {
       {/* // Si la frecuencia es semanal, mostramos el campo del día de la semana y la hora. */}
       {frequency === 'weekly' && (
         <>
-          <Grid xs={6}>
+          <Grid item xs={6}>
             <FormControl fullWidth>
               <InputLabel>Día de la semana</InputLabel>
               <Select
@@ -80,7 +79,7 @@ export default function CronConfig({ value, onChange }: CronConfigProps) {
               </Select>
             </FormControl>
           </Grid>
-          <Grid xs={6}>
+          <Grid item xs={6}>
             <TextField
               label="Hora"
               type="time"
@@ -94,7 +93,7 @@ export default function CronConfig({ value, onChange }: CronConfigProps) {
       {/* // Si la frecuencia es mensual, mostramos el campo del día del mes y la hora. */}
       {frequency === 'monthly' && (
         <>
-          <Grid xs={6}>
+          <Grid item xs={6}>
             <TextField
               label="Día del mes"
               type="number"
@@ -104,7 +103,7 @@ export default function CronConfig({ value, onChange }: CronConfigProps) {
               fullWidth
             />
           </Grid>
-          <Grid xs={6}>
+          <Grid item xs={6}>
             <TextField
               label="Hora"
               type="time"

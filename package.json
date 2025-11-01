@@ -16,13 +16,12 @@
     "test:ci": "npm run test:unit:ci && npm run test:e2e:ci"
   },
   "dependencies": {
-    "@emotion/cache": "^11.14.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
     "@fontsource/roboto": "^5.2.8",
     "@google/generative-ai": "^0.24.1",
-    "@mui/material": "^7.3.4",
-    "@mui/material-nextjs": "^7.3.3",
+    "@mui/material": "^5.0.0",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.78.0",
     "next": "14.2.3",
@@ -30,7 +29,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@mui/icons-material": "^7.3.4",
+    "@mui/icons-material": "^5.0.0",
     "@playwright/test": "^1.56.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",

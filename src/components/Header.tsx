@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 import {
   AppBar,
@@ -9,8 +8,8 @@ import {
   MenuItem,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { createBrowserClient } from '@supabase/ssr';
-import { useRouter } from 'next/navigation';
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/router';
 
 // Este es el componente del header.
 // Muestra el título de la aplicación y un menú de hamburguesa con una opción para cerrar sesión.
@@ -18,10 +17,7 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const router = useRouter();
   // Creamos un cliente de Supabase para el navegador.
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const supabase = createBrowserSupabaseClient();
 
   // Esta función se ejecuta cuando el usuario hace clic en el icono del menú.
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {

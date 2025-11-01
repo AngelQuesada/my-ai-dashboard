@@ -1,5 +1,4 @@
-'use client';
-import { createBrowserClient } from '@supabase/ssr';
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs';
 import {
   Table,
   TableBody,
@@ -14,31 +13,13 @@ import {
   Typography,
 } from '@mui/material';
 import Header from '@/components/Header';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // Esta es la página de resultados para la caja "Búsqueda de famosos en Granada".
 // Muestra los resultados de la última ejecución en una tabla.
-export default function FamososGranadaPage() {
-  const [results, setResults] = useState<any[]>([]);
+export default function FamososGranadaPage({ results }) {
   const [selectedResult, setSelectedResult] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-
-  // Obtenemos los resultados de la tabla de Supabase.
-  useEffect(() => {
-    const fetchResults = async () => {
-      const { data, error } = await supabase
-        .from('resultados_famosos_granada')
-        .select('*');
-      if (data) {
-        setResults(data);
-      }
-    };
-    fetchResults();
-  }, [supabase]);
 
   // Esta función se ejecuta cuando el usuario hace clic en el botón "Generar Email".
   // Abre un modal con el texto del email sugerido.
@@ -117,4 +98,17 @@ export default function FamososGranadaPage() {
       </Modal>
     </main>
   );
+}
+
+export async function getServerSideProps(context) {
+  const supabase = createPagesServerClient(context);
+  const { data: results, error } = await supabase
+    .from('resultados_famosos_granada')
+    .select('*');
+
+  return {
+    props: {
+      results,
+    },
+  };
 }

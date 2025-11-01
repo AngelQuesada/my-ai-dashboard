@@ -1,4 +1,3 @@
-'use client';
 import {
   Card,
   CardHeader,
@@ -13,7 +12,7 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useState } from 'react';
 import FamososGranadaModal from './FamososGranadaModal';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 // Este es el componente de la caja "Búsqueda de famosos en Granada".
 // Muestra la información de la última ejecución y los botones para configurar, abrir y ejecutar la caja.

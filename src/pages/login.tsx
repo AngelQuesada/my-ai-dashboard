@@ -1,6 +1,5 @@
-'use client';
 import { useState } from 'react';
-import { createBrowserClient } from '@supabase/ssr';
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { Box, Button, TextField, Typography } from '@mui/material';
 
 // Esta es la página de login.
@@ -9,10 +8,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   // Creamos un cliente de Supabase para el navegador.
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const supabase = createBrowserSupabaseClient();
 
   // Esta función se ejecuta cuando el usuario envía el formulario.
   // Llama a la función de Supabase para enviar el enlace mágico.
