@@ -9,7 +9,7 @@ import {
   Button,
   Avatar,
   CircularProgress,
-} from '@mui/d-material';
+} from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useState } from 'react';
 import FamososGranadaModal from './FamososGranadaModal';
@@ -61,6 +61,27 @@ export default function FamososGranadaBox() {
     }
   };
 
+  // Esta función se ejecuta cuando el usuario guarda la configuración del modal.
+  const handleSave = async (config: any) => {
+    try {
+      const response = await fetch('/api/update-box/famosos-granada', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(config),
+      });
+      if (response.ok) {
+        handleCloseModal();
+      } else {
+        alert('Error al guardar la configuración');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Error al guardar la configuración');
+    }
+  };
+
   return (
     <>
       <Card>
@@ -87,7 +108,11 @@ export default function FamososGranadaBox() {
           </Button>
         </CardActions>
       </Card>
-      <FamososGranadaModal open={isModalOpen} onClose={handleCloseModal} />
+      <FamososGranadaModal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onSave={handleSave}
+      />
     </>
   );
 }

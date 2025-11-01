@@ -14,6 +14,7 @@ import { useState } from 'react';
 type FamososGranadaModalProps = {
   open: boolean;
   onClose: () => void;
+  onSave: (config: any) => void;
 };
 
 const style = {
@@ -33,6 +34,7 @@ const style = {
 export default function FamososGranadaModal({
   open,
   onClose,
+  onSave,
 }: FamososGranadaModalProps) {
   const [cronConfig, setCronConfig] = useState({
     frequency: 'never',
@@ -41,28 +43,6 @@ export default function FamososGranadaModal({
     time: '08:00',
   });
   const [emailInstructions, setEmailInstructions] = useState('');
-
-  // Esta función se ejecuta cuando el usuario hace clic en el botón "Guardar Cambios".
-  // Llama a la API de backend para actualizar la configuración de la caja.
-  const handleSaveChanges = async () => {
-    try {
-      const response = await fetch('/api/update-box/famosos-granada', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ cronConfig, emailInstructions }),
-      });
-      if (response.ok) {
-        onClose();
-      } else {
-        alert('Error al guardar la configuración');
-      }
-    } catch (error) {
-      console.error(error);
-      alert('Error al guardar la configuración');
-    }
-  };
 
   return (
     <Modal
@@ -105,7 +85,7 @@ export default function FamososGranadaModal({
           <Button
             variant="contained"
             sx={{ ml: 1 }}
-            onClick={handleSaveChanges}
+            onClick={() => onSave({ cronConfig, emailInstructions })}
           >
             Guardar Cambios
           </Button>

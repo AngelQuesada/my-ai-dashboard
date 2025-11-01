@@ -3,10 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_ENV=development next dev",
+    "dev:test": "cross-env NODE_ENV=testing next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:e2e:run": "playwright test",
+    "test:e2e": "start-server-and-test 'npm run dev:test' http://localhost:3001 'npm run test:e2e:run'",
+    "test:unit:ci": "jest --ci",
+    "test:e2e:ci": "start-server-and-test 'npm run dev:test' http://localhost:3001 'npm run test:e2e:run'",
+    "test:ci": "npm run test:unit:ci && npm run test:e2e:ci"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -23,11 +30,24 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@mui/icons-material": "^7.3.4",
+    "@playwright/test": "^1.56.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cross-env": "^7.0.3",
+    "dotenv": "^17.2.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "playwright": "^1.56.1",
+    "start-server-and-test": "^2.0.5",
+    "ts-jest": "^29.4.5",
     "typescript": "^5"
   }
 }

@@ -19,10 +19,19 @@ export async function POST(request: Request) {
   // 2. Obtenemos los datos de la solicitud
   const { cronConfig, emailInstructions } = await request.json();
 
-  // 3. Actualizamos la configuración en Supabase (marcador de posición)
-  // En una aplicación real, aquí actualizaríamos la tabla "boxes" con la nueva configuración.
-  console.log('Cron config:', cronConfig);
-  console.log('Email instructions:', emailInstructions);
+  // 3. Actualizamos la configuración en Supabase
+  const { error } = await supabase.from('boxes').upsert({
+    id: 'famosos-granada',
+    cron_config: cronConfig,
+    email_instructions: emailInstructions,
+  });
+
+  if (error) {
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
   // 4. Devolvemos una respuesta de éxito
   return new Response(JSON.stringify({ success: true }), {
