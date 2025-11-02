@@ -29,6 +29,12 @@ You'll need to have [Node.js](https://nodejs.org/) (version 18 or higher) and [p
     cp .env.testing.example .env.testing.local
     ```
 
+### Supabase Setup
+
+**This step is required for the application to function correctly.**
+
+Follow the instructions in the [Supabase Setup Guide](./SUPABASE_SETUP.md) to create your Supabase project and database tables.
+
 ### Running the Development Server
 
 To run the development server, use the following command:
