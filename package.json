@@ -10,10 +10,10 @@
     "lint": "next lint",
     "test": "jest",
     "test:e2e:run": "playwright test",
-    "test:e2e": "start-server-and-test 'npm run dev:test' http://localhost:3001 'npm run test:e2e:run'",
+    "test:e2e": "start-server-and-test 'pnpm dev:test' http://localhost:3001 'pnpm test:e2e:run'",
     "test:unit:ci": "jest --ci",
-    "test:e2e:ci": "start-server-and-test 'npm run dev:test' http://localhost:3001 'npm run test:e2e:run'",
-    "test:ci": "npm run test:unit:ci && npm run test:e2e:ci"
+    "test:e2e:ci": "start-server-and-test 'pnpm dev:test' http://localhost:3001 'pnpm test:e2e:run'",
+    "test:ci": "pnpm test:unit:ci && pnpm test:e2e:ci"
   },
   "dependencies": {
     "@emotion/react": "^11.0.0",
